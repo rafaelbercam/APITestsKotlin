@@ -1,0 +1,39 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
+    id "org.jetbrains.kotlin.plugin.serialization" version "1.5.10"
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.hamcrest:hamcrest:2.2"
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'io.github.serpro69:kotlin-faker:1.11.0'
+    testImplementation 'org.junit.platform:junit-platform-suite-engine:1.8.2'
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.20")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation("io.rest-assured:kotlin-extensions:4.4.0")
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events "failed"
+        exceptionFormat "short"
+
+        debug {
+            events "started", "skipped", "failed"
+            exceptionFormat "full"
+        }
+
+        info.events = ["failed", "skipped"]
+    }
+}
