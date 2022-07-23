@@ -29,7 +29,7 @@ class UserTests: Setup() {
     @Order(2)
     @DisplayName("Criando novo usuário")
     fun `create a new user` (){
-        var user = UserFactory()
+        val user = UserFactory()
         response = request.createUser(user.createUser)
         assertEquals(HttpStatus.SC_CREATED, response.statusCode())
         assertEquals("Cadastro realizado com sucesso", response.jsonPath().get("message"))
@@ -49,7 +49,7 @@ class UserTests: Setup() {
     @Order(4)
     @DisplayName("Alterando um usuário")
     fun `update an user` (){
-        var user = UserFactory()
+        val user = UserFactory()
         response = request.updateUser(_id, user.createUser)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
         assertEquals("Registro alterado com sucesso", response.jsonPath().get("message"))

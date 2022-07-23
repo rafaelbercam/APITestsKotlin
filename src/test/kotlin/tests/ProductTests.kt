@@ -21,7 +21,7 @@ class ProductTests : Setup() {
 
     @BeforeEach
     fun `get token` () {
-        var user = LoginFactory()
+        val user = LoginFactory()
         response = login.login(user.loginSucceeded)
         token = response.jsonPath().get("authorization")
     }
@@ -38,7 +38,7 @@ class ProductTests : Setup() {
     @Order(1)
     @DisplayName("Criando novo produto")
     fun `create a new product` (){
-        var product = ProductFactory()
+        val product = ProductFactory()
         response = request.createNewProduct(product.createProduct, token)
         assertEquals(HttpStatus.SC_CREATED, response.statusCode())
         assertEquals("Cadastro realizado com sucesso", response.jsonPath().get("message"))
