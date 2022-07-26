@@ -33,4 +33,17 @@ class CartTests: Setup() {
         response = request.getCarts()
         assertEquals(HttpStatus.SC_OK, response.statusCode())
     }
+
+    @Test
+    @Order(2)
+    @DisplayName("Criando um carrinho")
+    fun `create new cart` (){
+
+        val prod = ProductRequests();
+        lateinit var resp: Response
+
+        resp = prod.getAllProducts()
+        // val _id = resp.jsonPath().get<0>("_id")
+       // response = request.createCart()
+    }
 }

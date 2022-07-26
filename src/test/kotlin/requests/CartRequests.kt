@@ -9,8 +9,7 @@ import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import io.restassured.response.Response
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+
 open class CartRequests: Setup() {
 
     open fun getCarts (): Response {
@@ -21,6 +20,24 @@ open class CartRequests: Setup() {
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
             } When {
                 get("/carrinhos")
+            } Then {
+
+            } Extract {
+                response()
+            }
+        return response
+    }
+
+    open fun createCart(_id: String, qtd:Int): Response {
+        val cart = arrayOf("{$_id: $qtd}")
+        val response =
+            Given {
+                spec(requestSpecification)
+                    .filter(RequestLoggingFilter(LogDetail.ALL))
+                    .filter(ResponseLoggingFilter(LogDetail.ALL))
+                    .body(cart)
+            } When {
+                post("/carrinhos")
             } Then {
 
             } Extract {
