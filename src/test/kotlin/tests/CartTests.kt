@@ -10,6 +10,7 @@ import requests.CartRequests
 import requests.LoginRequests
 import requests.ProductRequests
 import kotlin.test.assertEquals
+import kotlin.test.expect
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class CartTests: Setup() {
@@ -39,11 +40,11 @@ class CartTests: Setup() {
     @DisplayName("Criando um carrinho")
     fun `create new cart` (){
 
-        val prod = ProductRequests();
-        lateinit var resp: Response
-
-        resp = prod.getAllProducts()
-        // val _id = resp.jsonPath().get<0>("_id")
-       // response = request.createCart()
+//        val prod = ProductRequests();
+//        val resp: Response = prod.getAllProducts()
+//        val _id = resp.jsonPath().getString("produtos[0]._id")
+//        response = request.createCart(_id, 3)
+//        assertEquals(HttpStatus.SC_CREATED, response.statusCode())
+//        assertEquals("Cadastro realizado com sucesso", response.jsonPath().get("message"))
     }
 }
