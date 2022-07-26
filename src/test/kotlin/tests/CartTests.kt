@@ -40,11 +40,11 @@ class CartTests: Setup() {
     @DisplayName("Criando um carrinho")
     fun `create new cart` (){
 
-//        val prod = ProductRequests();
-//        val resp: Response = prod.getAllProducts()
-//        val _id = resp.jsonPath().getString("produtos[0]._id")
-//        response = request.createCart(_id, 3)
-//        assertEquals(HttpStatus.SC_CREATED, response.statusCode())
-//        assertEquals("Cadastro realizado com sucesso", response.jsonPath().get("message"))
+        val prod = ProductRequests();
+        val resp: Response = prod.getAllProducts()
+        val _id = resp.jsonPath().getString("produtos[0]._id")
+        response = request.createCart(_id, 3)
+        assertEquals(HttpStatus.SC_CREATED, response.statusCode())
+        assertEquals("Cadastro realizado com sucesso", response.jsonPath().get("message"))
     }
 }
