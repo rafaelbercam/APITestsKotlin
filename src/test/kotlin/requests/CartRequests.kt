@@ -30,15 +30,19 @@ open class CartRequests: Setup() {
         return response
     }
 
-    open fun createCart(_id: String, qtd:Int): Response {
-        val cart = arrayOf("{idProduto:$_id,quantidade: $qtd}")
+    open fun createCart(token:String ,_id: String, qtd:Int): Response {
+        //val cart = arrayOf("{idProduto:$_id,quantidade: $qtd}")
 
         val response =
             Given {
                 spec(requestSpecification)
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
-                    .body("{produtos: $cart}")
+                    .header("Authorization", token)
+                    .body("{ \"produtos\": [ {\n" +
+                            "      \"idProduto\": \"$_id\",\n" +
+                            "      \"quantidade\": $qtd\n" +
+                            "    }]}")
             } When {
                 post("/carrinhos")
             } Then {
