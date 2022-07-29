@@ -52,4 +52,21 @@ open class CartRequests: Setup() {
             }
         return response
     }
+
+    open fun cancelCart(token:String): Response{
+        val response =
+            Given {
+                spec(requestSpecification)
+                    .filter(RequestLoggingFilter(LogDetail.ALL))
+                    .filter(ResponseLoggingFilter(LogDetail.ALL))
+                    .header("Authorization", token)
+            } When {
+                delete("/carrinhos/cancelar-compra")
+            } Then {
+
+            } Extract {
+                response()
+            }
+        return response
+    }
 }

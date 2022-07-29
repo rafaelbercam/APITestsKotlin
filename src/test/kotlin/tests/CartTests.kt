@@ -18,7 +18,9 @@ class CartTests: Setup() {
     var login = LoginRequests()
     var request = CartRequests()
     lateinit var response: Response
-    var token : String = ""
+    lateinit var token : String
+
+
 
     @BeforeEach
     fun `get token` () {
@@ -29,6 +31,15 @@ class CartTests: Setup() {
 
     @Test
     @Order(1)
+    @DisplayName("cancelando carrinhos existentes")
+    fun `cancel cart` (){
+        response = request.cancelCart(token)
+        assertEquals(HttpStatus.SC_OK, response.statusCode())
+        assertEquals("Registro excluído com sucesso. Estoque dos produtos reabastecido", response.jsonPath().get("message"))
+    }
+
+    @Test
+    @Order(2)
     @DisplayName("Listando todos carrinhos")
     fun `list all products` (){
         response = request.getCarts()
@@ -36,10 +47,9 @@ class CartTests: Setup() {
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     @DisplayName("Criando um carrinho")
     fun `create new cart` (){
-
         val prod = ProductRequests();
         val resp: Response = prod.getAllProducts()
         val _id = resp.jsonPath().getString("produtos[0]._id")
