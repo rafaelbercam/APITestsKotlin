@@ -9,8 +9,6 @@ import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import io.restassured.response.Response
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 open class CartRequests: Setup() {
 
@@ -31,8 +29,6 @@ open class CartRequests: Setup() {
     }
 
     open fun createCart(token:String ,_id: String, qtd:Int): Response {
-        //val cart = arrayOf("{idProduto:$_id,quantidade: $qtd}")
-
         val response =
             Given {
                 spec(requestSpecification)
