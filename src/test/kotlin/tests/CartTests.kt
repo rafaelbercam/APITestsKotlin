@@ -40,14 +40,6 @@ class CartTests: Setup() {
 
     @Test
     @Order(2)
-    @DisplayName("Listando todos carrinhos")
-    fun `list all products` (){
-        response = request.getCarts()
-        assertEquals(HttpStatus.SC_OK, response.statusCode())
-    }
-
-    @Test
-    @Order(3)
     @DisplayName("Criando um carrinho")
     fun `create new cart` (){
         val prod = ProductRequests();
@@ -57,5 +49,13 @@ class CartTests: Setup() {
         assertEquals(HttpStatus.SC_CREATED, response.statusCode())
         assertEquals("Cadastro realizado com sucesso", response.jsonPath().get("message"))
 
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("Listando todos carrinhos")
+    fun `list all products` (){
+        response = request.getCarts()
+        assertEquals(HttpStatus.SC_OK, response.statusCode())
     }
 }
