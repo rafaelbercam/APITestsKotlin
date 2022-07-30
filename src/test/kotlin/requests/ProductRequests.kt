@@ -67,6 +67,25 @@ open class ProductRequests : Setup() {
         return response
     }
 
+    open fun updateProduct(product : Product, _id: String, token: String) : Response {
+        val response =
+            Given {
+                spec(requestSpecification)
+                    .filter(RequestLoggingFilter(LogDetail.ALL))
+                    .filter(ResponseLoggingFilter(LogDetail.ALL))
+                    .header("Authorization", token)
+                    .body(Json.encodeToString(product))
+            } When {
+                put("/produtos/$_id" +
+                        "")
+            } Then {
+
+            } Extract {
+                response()
+            }
+        return response
+    }
+
     open fun deleteProduct (_id: String) : Response {
 
         val response =
