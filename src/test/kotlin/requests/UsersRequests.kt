@@ -83,4 +83,20 @@ open class UsersRequests : Setup() {
         return response
     }
 
+    open fun deleteUser(_id: String): Response{
+        val response =
+            Given {
+                spec(requestSpecification)
+                    .filter(RequestLoggingFilter(LogDetail.ALL))
+                    .filter(ResponseLoggingFilter(LogDetail.ALL))
+            } When {
+                delete("/usuarios/${_id}")
+            } Then {
+
+            } Extract {
+                response()
+            }
+        return response
+    }
+
 }

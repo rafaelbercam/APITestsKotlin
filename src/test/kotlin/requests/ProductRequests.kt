@@ -32,6 +32,23 @@ open class ProductRequests : Setup() {
         return response
     }
 
+    open fun getProductById (_id: String) : Response {
+
+        val response =
+            Given {
+                spec(requestSpecification)
+                    .filter(RequestLoggingFilter(LogDetail.ALL))
+                    .filter(ResponseLoggingFilter(LogDetail.ALL))
+            } When {
+                get("/produtos/$_id")
+            } Then {
+
+            } Extract {
+                response()
+            }
+        return response
+    }
+
     open fun createNewProduct(product : Product, token: String) : Response {
         val response =
             Given {
@@ -42,6 +59,23 @@ open class ProductRequests : Setup() {
                     .body(Json.encodeToString(product))
             } When {
                 post("/produtos")
+            } Then {
+
+            } Extract {
+                response()
+            }
+        return response
+    }
+
+    open fun deleteProduct (_id: String) : Response {
+
+        val response =
+            Given {
+                spec(requestSpecification)
+                    .filter(RequestLoggingFilter(LogDetail.ALL))
+                    .filter(ResponseLoggingFilter(LogDetail.ALL))
+            } When {
+                delete("/produtos/$_id")
             } Then {
 
             } Extract {

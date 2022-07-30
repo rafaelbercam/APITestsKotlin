@@ -69,4 +69,21 @@ open class CartRequests: Setup() {
             }
         return response
     }
+
+    open fun submitCart(token:String): Response{
+        val response =
+            Given {
+                spec(requestSpecification)
+                    .filter(RequestLoggingFilter(LogDetail.ALL))
+                    .filter(ResponseLoggingFilter(LogDetail.ALL))
+                    .header("Authorization", token)
+            } When {
+                delete("/carrinhos/concluir-compra")
+            } Then {
+
+            } Extract {
+                response()
+            }
+        return response
+    }
 }
