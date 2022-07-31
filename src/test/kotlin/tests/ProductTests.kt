@@ -55,4 +55,28 @@ class ProductTests : Setup() {
         assertEquals(HttpStatus.SC_OK, response.statusCode())
         assertEquals(_id, response.jsonPath().get("_id"))
     }
+
+    @Test
+    @Order(4)
+    @DisplayName("alterando um produto")
+    fun `update a product` (){
+        val product = ProductFactory()
+        val allProducts: Response = request.getAllProducts();
+        _id = allProducts.jsonPath().get("produtos[0]._id")
+        response = request.updateProduct(product.createProduct,_id,token)
+        assertEquals(HttpStatus.SC_OK, response.statusCode())
+        assertEquals("Registro alterado com sucesso", response.jsonPath().get("message"))
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("deletando um produto")
+    fun `delete a product` (){
+        var newProductFac = ProductFactory()
+        var newProduct:Response = request.createNewProduct(newProductFac.createProduct,token)
+        _id = newProduct.jsonPath().get("_id")
+        response = request.deleteProduct(_id, token)
+        assertEquals(HttpStatus.SC_OK, response.statusCode())
+        assertEquals("Registro excluído com sucesso", response.jsonPath().get("message"))
+    }
 }
