@@ -59,7 +59,7 @@ open class UsersRequests : Setup() {
             } When {
                 post("/usuarios")
             } Then {
-
+                assertThat().statusCode(201)
             } Extract {
                 response()
             }

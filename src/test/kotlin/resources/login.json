@@ -1,0 +1,7 @@
+{
+    "email": "fulano@qa.com",
+    "password": "teste",
+    "wrong_email": "xxx@yy.com",
+    "email_empty": "",
+    "password_empty": ""
+}

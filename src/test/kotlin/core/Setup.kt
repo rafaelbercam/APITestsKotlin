@@ -1,5 +1,7 @@
 package core
 
+import com.google.gson.Gson
+import factory.LoginData
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
 import io.restassured.config.LogConfig
@@ -10,10 +12,15 @@ import io.restassured.specification.RequestSpecification
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
+import java.io.File
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 open class Setup {
+
+    val pathProject = System.getProperty("user.dir")
+    var loginJson = File("$pathProject/src/test/kotlin/resources/login.json").readText(Charsets.UTF_8)
+    val loginData = Gson().fromJson(loginJson, LoginData::class.java)
 
     companion object {
         lateinit var requestSpecification: RequestSpecification

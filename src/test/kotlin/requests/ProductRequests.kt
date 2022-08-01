@@ -1,5 +1,6 @@
 package requests
 
+import com.google.gson.Gson
 import core.Setup
 import factory.Product
 import io.restassured.filter.log.LogDetail
@@ -56,7 +57,7 @@ open class ProductRequests : Setup() {
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
-                    .body(Json.encodeToString(product))
+                    .body(Gson().toJson(product))
             } When {
                 post("/produtos")
             } Then {

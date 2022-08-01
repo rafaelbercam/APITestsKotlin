@@ -2,13 +2,14 @@
 package tests
 
 import core.Setup
-import factory.LoginFactory
-import factory.ProductFactory
+import factory.Product
+import factory.UserFactory
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.*
 import requests.LoginRequests
 import requests.ProductRequests
+import requests.UsersRequests
 import kotlin.test.assertEquals
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
@@ -19,11 +20,15 @@ class ProductTests : Setup() {
     lateinit var response: Response
     lateinit var token : String
     lateinit var _id : String
+    private val product = Product()
+    var usersRequests  = UsersRequests()
+
 
     @BeforeAll
     fun `get token` () {
-        val user = LoginFactory()
-        response = login.login(user.loginSucceeded)
+        val user = UserFactory().createUser
+        usersRequests.createUser(user)
+        response = login.loginRequest(user.email, user.password)
         token = response.jsonPath().get("authorization")
     }
 
@@ -39,8 +44,7 @@ class ProductTests : Setup() {
     @Order(2)
     @DisplayName("Criando novo produto")
     fun `create a new product` (){
-        val product = ProductFactory()
-        response = request.createNewProduct(product.createProduct, token)
+        response = request.createNewProduct(product, token)
         assertEquals(HttpStatus.SC_CREATED, response.statusCode())
         assertEquals("Cadastro realizado com sucesso", response.jsonPath().get("message"))
     }
@@ -60,10 +64,10 @@ class ProductTests : Setup() {
     @Order(4)
     @DisplayName("alterando um produto")
     fun `update a product` (){
-        val product = ProductFactory()
+
         val allProducts: Response = request.getAllProducts();
         _id = allProducts.jsonPath().get("produtos[0]._id")
-        response = request.updateProduct(product.createProduct,_id,token)
+        response = request.updateProduct(product,_id,token)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
         assertEquals("Registro alterado com sucesso", response.jsonPath().get("message"))
     }
@@ -72,8 +76,7 @@ class ProductTests : Setup() {
     @Order(5)
     @DisplayName("deletando um produto")
     fun `delete a product` (){
-        var newProductFac = ProductFactory()
-        var newProduct:Response = request.createNewProduct(newProductFac.createProduct,token)
+        var newProduct:Response = request.createNewProduct(product,token)
         _id = newProduct.jsonPath().get("_id")
         response = request.deleteProduct(_id, token)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
