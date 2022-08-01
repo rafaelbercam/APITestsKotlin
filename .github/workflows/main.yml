@@ -1,0 +1,54 @@
+name: "testes serverest"
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+
+jobs:
+  test-linux:
+    name: API@${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2019]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Install operating system dependencies
+      run:  |
+       npm install -g allure-commandline --save-dev
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: Run tests
+      if: always()
+      continue-on-error: true
+      run: ./mvnw clean test
+    - name: 📊 Step 5 - Collect Allure files and generate allure-report folder
+      run: |
+        allure generate allure-results -o allure-report/
+    - name: 🎁 Step 6 - Publishing Allure artifact to GitHub Actions
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-report
+        path: allure-report
+        
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages  # default: gh-pages
+        publish_dir: allure-report
