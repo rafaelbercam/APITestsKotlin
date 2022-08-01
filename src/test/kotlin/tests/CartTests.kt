@@ -20,13 +20,15 @@ class CartTests: Setup() {
     lateinit var response: Response
     lateinit var token : String
 
-
-
-    @BeforeEach
-    fun `get token` () {
+    @BeforeAll
+    fun `create kart before tests and get token`(){
         val user = LoginFactory()
         response = login.login(user.loginSucceeded)
         token = response.jsonPath().get("authorization")
+        val prod = ProductRequests();
+        val resp: Response = prod.getAllProducts()
+        val _id = resp.jsonPath().getString("produtos[0]._id")
+        response = request.createCart(token,_id, 3)
     }
 
     @Test
@@ -57,5 +59,14 @@ class CartTests: Setup() {
     fun `list all products` (){
         response = request.getCarts()
         assertEquals(HttpStatus.SC_OK, response.statusCode())
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Concluindo compra carrinho")
+    fun `submit cart` (){
+        response = request.submitCart(token)
+        assertEquals(HttpStatus.SC_OK, response.statusCode())
+        assertEquals("Registro excluído com sucesso", response.jsonPath().get("message"))
     }
 }

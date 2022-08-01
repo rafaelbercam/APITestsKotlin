@@ -11,7 +11,7 @@ class ProductFactory {
             val productName = faker.commerce.productName()
             return Product(
                 nome = productName,
-                preco = faker.random.nextInt(bound = 999),
+                preco = faker.random.nextInt(10,999),
                 descricao = "Awesome $productName",
                 quantidade = faker.random.nextInt(bound = 9999)
             )

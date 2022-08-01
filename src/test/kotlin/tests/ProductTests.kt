@@ -20,7 +20,7 @@ class ProductTests : Setup() {
     lateinit var token : String
     lateinit var _id : String
 
-    @BeforeEach
+    @BeforeAll
     fun `get token` () {
         val user = LoginFactory()
         response = login.login(user.loginSucceeded)
