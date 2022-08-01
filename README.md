@@ -211,3 +211,4 @@ que tem capacidade de decidir qual será a ordem de execução dos meus testes.
 No exemplo utilizei o `OrderAnnotation::class` que é representado pelo anotação `@Order`.
 Essa anotação espera um número inteiro na qual seguirá uma ordem crescente de execução.
 
+OBS: Não utilize para criar uma dependência de um cenário para outro, mas sim organizar os reports, analisar os logs, etc.
