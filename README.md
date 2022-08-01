@@ -16,6 +16,19 @@ Link do Repo: https://github.com/ServeRest/ServeRest
 
 ServeRest está disponível de forma [online](https://serverest.dev), no [npm](https://www.npmjs.com/package/serverest) e no [docker](https://hub.docker.com/r/paulogoncalvesbh/serverest/).
 
+### Para subir o servido localmente com NPM
+
+Execute o seguinte comando no terminal:
+
+```sh
+npx serverest@latest
+```
+
+Para rodar os testes no terminal use o comando abaixo:
+```
+./gradlew clean test
+```
+
 ## __Instalando Dependências__
 
 ###Instalar via [Gradle](https://gradle.org/)

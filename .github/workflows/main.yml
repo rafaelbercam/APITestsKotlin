@@ -26,25 +26,20 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: Cache Maven packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
 
     - name: Run tests
       if: always()
       continue-on-error: true
-      run: ./mvnw clean test
-    - name: 📊 Step 5 - Collect Allure files and generate allure-report folder
-      run: |
-        allure generate allure-results -o allure-report/
-    - name: 🎁 Step 6 - Publishing Allure artifact to GitHub Actions
-      uses: actions/upload-artifact@v2
+      run: ./gradlew clean test
+    - name: Test marketplace action
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      id: allure-report
       with:
-        name: allure-report
-        path: allure-report
+        allure_results: build/allure-results
+        gh_pages: gh-pages
+        allure_report: allure-report
+        allure_history: allure-history
         
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3

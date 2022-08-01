@@ -8,7 +8,7 @@ import org.apache.http.HttpStatus
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import requests.UsersRequests
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 
 @TestMethodOrder(OrderAnnotation::class)
 class UserTests: Setup() {
