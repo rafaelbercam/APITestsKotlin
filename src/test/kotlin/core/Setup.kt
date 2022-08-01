@@ -26,7 +26,7 @@ open class Setup {
         val config = RestAssuredConfig.config().logConfig(logConfig)
 
         requestSpecification = RequestSpecBuilder()
-            .setBaseUri("http://localhost:3000")
+            .setBaseUri("https://serverest.dev")
             .setContentType(ContentType.JSON)
             .setRelaxedHTTPSValidation()
             .setConfig(config)
