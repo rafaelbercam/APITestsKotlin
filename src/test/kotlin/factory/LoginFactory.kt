@@ -37,6 +37,7 @@ open class LoginFactory {
             )
         }
 }
+
 @Serializable
 data class Login(
     @Required var email: String,

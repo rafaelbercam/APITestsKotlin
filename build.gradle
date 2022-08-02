@@ -17,7 +17,11 @@ configurations {
 }
 
 dependencies {
-    ktlint "com.pinterest:ktlint:0.43.1"
+    ktlint("com.pinterest:ktlint:0.46.1") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, getObjects().named(Bundling, Bundling.EXTERNAL))
+        }
+    }
     implementation "org.hamcrest:hamcrest:2.2"
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
@@ -54,18 +58,17 @@ tasks.test {
 
 task ktlint(type: JavaExec, group: "verification") {
     description = "Check Kotlin code style."
-    main = "com.pinterest.ktlint.Main"
     classpath = configurations.ktlint
-    args "src/**/*.kt",
-    // to generate report in checkstyle format prepend following args:
-     "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
-    // see https://github.com/pinterest/ktlint#usage for more
+    mainClass.set("com.pinterest.ktlint.Main")
+    args "src/**/*.kt"
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
 }
 check.dependsOn ktlint
 
 task ktlintFormat(type: JavaExec, group: "formatting") {
     description = "Fix Kotlin code style deviations."
-    main = "com.pinterest.ktlint.Main"
     classpath = configurations.ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
     args "-F", "src/**/*.kt"
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
 }

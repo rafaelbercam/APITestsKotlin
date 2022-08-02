@@ -16,7 +16,6 @@ import kotlinx.serialization.json.Json
 open class UsersRequests : Setup() {
 
     open fun getAllUsers(): Response {
-
         val response =
             Given {
                 spec(requestSpecification)
