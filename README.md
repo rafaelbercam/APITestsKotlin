@@ -225,3 +225,9 @@ No exemplo utilizei o `OrderAnnotation::class` que é representado pelo anotaç�
 Essa anotação espera um número inteiro na qual seguirá uma ordem crescente de execução.
 
 OBS: Não utilize para criar uma dependência de um cenário para outro, mas sim organizar os reports, analisar os logs, etc.
+
+### Allure
+
+Para gerar os reports basta rodar os commandos
+
+`./gradlew allureReport` e `./gradlew allureServe`
