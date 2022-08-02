@@ -70,7 +70,7 @@ class ProductTests : Setup() {
     @Order(5)
     @DisplayName("deletando um produto")
     fun `delete a product` (){
-        response = productRequest.deleteProduct(_id, token)
+        val response = productRequest.deleteProduct(_id, token)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
         assertEquals("Registro excluído com sucesso", response.jsonPath().get("message"))
     }

@@ -18,9 +18,9 @@ import java.io.File
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 open class Setup {
 
-    val pathProject = System.getProperty("user.dir")
+    private val pathProject: String = System.getProperty("user.dir")
     var loginJson = File("$pathProject/src/test/kotlin/resources/login.json").readText(Charsets.UTF_8)
-    val loginData = Gson().fromJson(loginJson, LoginData::class.java)
+    val loginData: LoginData = Gson().fromJson(loginJson, LoginData::class.java)
     val gson = Gson()
 
     companion object {

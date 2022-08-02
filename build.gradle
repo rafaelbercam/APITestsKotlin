@@ -35,7 +35,7 @@ tasks.test {
     useJUnitPlatform()
     systemProperties["junit.jupiter.execution.parallel.enabled"] = true
     systemProperties["junit.jupiter.execution.parallel.mode.default"] = "concurrent"
-    maxParallelForks = 1
+    maxParallelForks = 2
     testLogging {
         events "failed"
         exceptionFormat "short"
