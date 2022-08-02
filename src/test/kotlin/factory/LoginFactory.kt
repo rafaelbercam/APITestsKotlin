@@ -38,6 +38,7 @@ open class LoginFactory {
         }
 }
 @Serializable
-data class Login (
+data class Login(
     @Required var email: String,
-    @Required var password: String  )
+    @Required var password: String
+)

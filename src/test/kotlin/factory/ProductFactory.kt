@@ -11,7 +11,7 @@ class ProductFactory {
             val productName = faker.commerce.productName()
             return Product(
                 nome = productName,
-                preco = faker.random.nextInt(10,999),
+                preco = faker.random.nextInt(10, 999),
                 descricao = "Awesome $productName",
                 quantidade = faker.random.nextInt(bound = 9999)
             )
@@ -19,8 +19,9 @@ class ProductFactory {
 }
 
 @Serializable
-data class Product (
+data class Product(
     @Required var nome: String,
     @Required var preco: Int,
     @Required var descricao: String,
-    @Required var quantidade: Int )
+    @Required var quantidade: Int
+)

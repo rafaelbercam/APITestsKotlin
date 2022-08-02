@@ -15,8 +15,7 @@ import kotlinx.serialization.json.Json
 
 open class LoginRequests : Setup() {
 
-    open fun login (login: Login) : Response {
-
+    open fun login(login: Login): Response {
         val response =
             Given {
                 spec(requestSpecification)
@@ -26,7 +25,6 @@ open class LoginRequests : Setup() {
             } When {
                 post("/login")
             } Then {
-
             } Extract {
                 response()
             }

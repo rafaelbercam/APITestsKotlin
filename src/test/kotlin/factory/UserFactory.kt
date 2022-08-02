@@ -19,12 +19,12 @@ class UserFactory {
                 administrador = "true"
             )
         }
-
 }
 
 @Serializable
-data class User (
+data class User(
     @Required var nome: String,
     @Required var email: String,
     @Required var password: String,
-    @Required var administrador: String )
+    @Required var administrador: String
+)

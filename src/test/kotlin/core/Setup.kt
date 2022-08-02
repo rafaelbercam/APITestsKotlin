@@ -11,7 +11,6 @@ import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
 
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 open class Setup {
 
@@ -20,7 +19,7 @@ open class Setup {
     }
 
     @BeforeAll
-    fun setup(){
+    fun setup() {
         val logConfig = LogConfig.logConfig()
             .enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL)
         val config = RestAssuredConfig.config().logConfig(logConfig)
@@ -34,7 +33,7 @@ open class Setup {
     }
 
     @AfterAll
-    fun tearDown(){
+    fun tearDown() {
         RestAssured.reset()
     }
 }
