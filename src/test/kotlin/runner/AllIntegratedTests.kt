@@ -8,6 +8,7 @@ import tests.LoginTests
 import tests.ProductTests
 import tests.UserTests
 import tests.CartTests
+
 @Suite
 @Disabled
 @SelectClasses(
