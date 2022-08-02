@@ -57,7 +57,7 @@ open class ProductRequests : Setup() {
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
-                    .body(Gson().toJson(product))
+                    .body(gson.toJson(product))
             } When {
                 post("/produtos")
             } Then {
@@ -75,7 +75,7 @@ open class ProductRequests : Setup() {
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
-                    .body(Gson().toJson(product))
+                    .body(gson.toJson(product))
             } When {
                 put("/produtos/$_id" +
                         "")

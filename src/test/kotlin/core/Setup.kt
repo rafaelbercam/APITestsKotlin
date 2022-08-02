@@ -21,6 +21,7 @@ open class Setup {
     val pathProject = System.getProperty("user.dir")
     var loginJson = File("$pathProject/src/test/kotlin/resources/login.json").readText(Charsets.UTF_8)
     val loginData = Gson().fromJson(loginJson, LoginData::class.java)
+    val gson = Gson()
 
     companion object {
         lateinit var requestSpecification: RequestSpecification

@@ -2,25 +2,30 @@
 package tests
 
 import core.Setup
+import factory.User
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.*
 import requests.CartRequests
 import requests.LoginRequests
 import requests.ProductRequests
+import requests.UsersRequests
 import kotlin.test.assertEquals
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class CartTests: Setup() {
 
-    var login = LoginRequests()
-    var request = CartRequests()
-    lateinit var response: Response
-    lateinit var token : String
+    private var login = LoginRequests()
+    private var request = CartRequests()
+    private lateinit var response: Response
+    private lateinit var token : String
+    private var usersRequests  = UsersRequests()
+    private val user = User()
 
     @BeforeAll
     fun `create kart before tests and get token`(){
-        response = login.loginRequest(loginData.email, loginData.password )
+        usersRequests.createUser(user)
+        response = login.loginRequest(user.email, user.password)
         token = response.jsonPath().get("authorization")
         val prod = ProductRequests();
         val resp: Response = prod.getAllProducts()

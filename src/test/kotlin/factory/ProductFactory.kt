@@ -1,7 +1,8 @@
 package factory
 
 import io.github.serpro69.kfaker.Faker
-var faker = Faker()
+
+private val faker = Faker()
 val productName = faker.commerce.productName()
 
 data class Product (

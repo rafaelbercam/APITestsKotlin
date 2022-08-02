@@ -3,7 +3,6 @@ package tests
 
 import core.Setup
 import factory.User
-import factory.UserFactory
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.*
@@ -16,13 +15,13 @@ class LoginTests: Setup() {
 
     private var login = LoginRequests()
     private lateinit var response: Response
-    var usersRequests  = UsersRequests()
+    private var usersRequests  = UsersRequests()
+    private val user = User()
 
     @Test
     @Order(1)
     @DisplayName("Login bem sucedido")
     fun `login succeeded` () {
-        val user = UserFactory().createUser
         response = usersRequests.createUser(user)
         Assertions.assertEquals(HttpStatus.SC_CREATED, response.statusCode())
         response = login.loginRequest(user.email, user.password )

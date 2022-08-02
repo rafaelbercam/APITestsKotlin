@@ -55,7 +55,7 @@ open class UsersRequests : Setup() {
                 spec(requestSpecification)
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
-                    .body(Json.encodeToString(user))
+                    .body(gson.toJson(user))
             } When {
                 post("/usuarios")
             } Then {
@@ -72,7 +72,7 @@ open class UsersRequests : Setup() {
                 spec(requestSpecification)
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
-                    .body(Json.encodeToString(user))
+                    .body(gson.toJson(user))
             } When {
                 put("/usuarios/${_id}")
             } Then {
