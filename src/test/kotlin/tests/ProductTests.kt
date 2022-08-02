@@ -7,7 +7,6 @@ import factory.User
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.*
-import requests.CartRequests
 import requests.LoginRequests
 import requests.ProductRequests
 import requests.UsersRequests

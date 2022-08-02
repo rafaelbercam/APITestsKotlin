@@ -14,16 +14,15 @@ import org.junit.jupiter.api.Assertions.assertEquals
 @TestMethodOrder(OrderAnnotation::class)
 class UserTests: Setup() {
 
-    private var _id: String = ""
-    private var request  = UsersRequests()
+    private lateinit var _id: String
+    private var usersRequests  = UsersRequests()
     private lateinit var response: Response
-    private var user = User()
 
     @Test
     @Order(1)
     @DisplayName("Listando todos Usuarios")
     fun `list all users` (){
-        response = request.getAllUsers()
+        response = usersRequests.getAllUsers()
         assertEquals(HttpStatus.SC_OK, response.statusCode())
     }
 
@@ -31,8 +30,7 @@ class UserTests: Setup() {
     @Order(2)
     @DisplayName("Criando novo usuario")
     fun `create a new user` (){
-        user = User()
-        response = request.createUser(user)
+        response = usersRequests.createUser(User())
         assertEquals(HttpStatus.SC_CREATED, response.statusCode())
         assertEquals("Cadastro realizado com sucesso", response.jsonPath().get("message"))
         _id = response.jsonPath().get("_id")
@@ -42,7 +40,7 @@ class UserTests: Setup() {
     @Order(3)
     @DisplayName("Listando usuário por _id")
     fun `get user by _id` (){
-        response = request.getUSerById(_id)
+        response = usersRequests.getUSerById(_id)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
         assertEquals(_id, response.jsonPath().get("_id"))
     }
@@ -51,8 +49,7 @@ class UserTests: Setup() {
     @Order(4)
     @DisplayName("Alterando um usuário")
     fun `update an user` (){
-        user = User()
-        response = request.updateUser(_id, user)
+        response = usersRequests.updateUser(_id, User())
         assertEquals(HttpStatus.SC_OK, response.statusCode())
         assertEquals("Registro alterado com sucesso", response.jsonPath().get("message"))
     }

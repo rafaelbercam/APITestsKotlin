@@ -8,7 +8,7 @@ val lastName = faker.name.lastName()
 
 data class User (
     var nome: String = "$firstName $lastName",
-    var email: String = "${firstName.lowercase()}${lastName.lowercase()}@email.com",
+    var email: String = "${firstName.lowercase()}${lastName.lowercase()}${faker.random.nextInt()}@email.com",
     var password: String = faker.random.nextLong(bound = 9999999L).toString(),
     var administrador: String = "true"
 )
