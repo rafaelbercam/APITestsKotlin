@@ -75,7 +75,7 @@ open class ProductRequests : Setup() {
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
-                    .body(Json.encodeToString(product))
+                    .body(Gson().toJson(product))
             } When {
                 put("/produtos/$_id" +
                         "")

@@ -20,7 +20,7 @@ class ProductTests : Setup() {
     lateinit var response: Response
     lateinit var token : String
     lateinit var _id : String
-    private val product = Product()
+    private var product = Product()
     var usersRequests  = UsersRequests()
 
 
@@ -64,9 +64,9 @@ class ProductTests : Setup() {
     @Order(4)
     @DisplayName("alterando um produto")
     fun `update a product` (){
-
         val allProducts: Response = request.getAllProducts();
         _id = allProducts.jsonPath().get("produtos[0]._id")
+        product = Product()
         response = request.updateProduct(product,_id,token)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
         assertEquals("Registro alterado com sucesso", response.jsonPath().get("message"))
@@ -76,8 +76,6 @@ class ProductTests : Setup() {
     @Order(5)
     @DisplayName("deletando um produto")
     fun `delete a product` (){
-        var newProduct:Response = request.createNewProduct(product,token)
-        _id = newProduct.jsonPath().get("_id")
         response = request.deleteProduct(_id, token)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
         assertEquals("Registro excluído com sucesso", response.jsonPath().get("message"))
