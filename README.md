@@ -1,4 +1,5 @@
 [![Badge ServeRest](https://img.shields.io/badge/API-ServeRest-green)](https://github.com/ServeRest/ServeRest/)
+<a href="https://github.com/rafaelbercam/APITestsKotlin/"><img src="https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg" alt="ktlint"></a>
 # __Testes de API em Kotlin__
 
 
