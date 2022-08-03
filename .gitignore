@@ -50,7 +50,10 @@ gradle-app.setting
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-#allure
+/.idea/
+/.allure/
+/allure-report/
 .allure
 
 # End of https://www.toptal.com/developers/gitignore/api/kotlin,gradle
+

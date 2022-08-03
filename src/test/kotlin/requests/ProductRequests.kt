@@ -10,8 +10,6 @@ import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import io.restassured.response.Response
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 open class ProductRequests : Setup() {
 
@@ -52,7 +50,7 @@ open class ProductRequests : Setup() {
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
-                    .body(Json.encodeToString(product))
+                    .body(gson.toJson(product))
             } When {
                 post("/produtos")
             } Then {
@@ -69,7 +67,7 @@ open class ProductRequests : Setup() {
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
-                    .body(Json.encodeToString(product))
+                    .body(gson.toJson(product))
             } When {
                 put("/produtos/$_id")
             } Then {

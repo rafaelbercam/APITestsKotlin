@@ -24,7 +24,7 @@ dependencies {
     }
     implementation "org.hamcrest:hamcrest:2.2"
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.20"
     implementation 'io.github.serpro69:kotlin-faker:1.11.0'
     testImplementation("io.qameta.allure:allure-junit5:2.14.0")
     implementation("io.qameta.allure:allure-okhttp3:2.10.0")
@@ -33,9 +33,11 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.20")
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testImplementation("io.rest-assured:kotlin-extensions:4.4.0")
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation("io.qameta.allure:allure-junit5:2.14.0")
+    implementation("io.qameta.allure:allure-okhttp3:2.10.0")
+    implementation 'com.google.code.gson:gson:2.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
-
 allure {
     version = "2.14.0"
     downloadLinkFormat = "https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.14.0/allure-commandline-2.14.0.zip"
@@ -43,6 +45,9 @@ allure {
 
 tasks.test {
     useJUnitPlatform()
+    systemProperties["junit.jupiter.execution.parallel.enabled"] = true
+    systemProperties["junit.jupiter.execution.parallel.mode.default"] = "concurrent"
+    maxParallelForks = 2
     testLogging {
         events "failed"
         exceptionFormat "short"
@@ -72,3 +77,4 @@ task ktlintFormat(type: JavaExec, group: "formatting") {
     args "-F", "src/**/*.kt"
     // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
 }
+

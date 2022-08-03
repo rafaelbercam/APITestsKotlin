@@ -10,8 +10,7 @@ import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import io.restassured.response.Response
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+
 
 open class UsersRequests : Setup() {
 
@@ -51,7 +50,7 @@ open class UsersRequests : Setup() {
                 spec(requestSpecification)
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
-                    .body(Json.encodeToString(user))
+                    .body(gson.toJson(user))
             } When {
                 post("/usuarios")
             } Then {
@@ -67,7 +66,7 @@ open class UsersRequests : Setup() {
                 spec(requestSpecification)
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
-                    .body(Json.encodeToString(user))
+                    .body(gson.toJson(user))
             } When {
                 put("/usuarios/$_id")
             } Then {
