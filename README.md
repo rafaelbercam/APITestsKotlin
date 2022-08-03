@@ -35,7 +35,7 @@ O projeto esta dividido da seguinte maneira:
             [runner] -> Runner do JUnit
             [tests] -> Arquivos de teste do JUnit
 
-
+## Detalhamento
 ### core
 
 A classe `Setup` é responsável por configurar o `RequestSpecification` do REST-assured antes de realizar as requisições,
