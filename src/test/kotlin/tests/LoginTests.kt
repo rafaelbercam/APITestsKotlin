@@ -1,17 +1,22 @@
 @file:Suppress("ClassName")
+
 package tests
 
 import core.Setup
 import factory.User
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.MethodOrderer
+import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import requests.LoginRequests
 import requests.UsersRequests
 import kotlin.test.assertEquals
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class LoginTests: Setup() {
+class LoginTests : Setup() {
 
     private var login = LoginRequests()
     private lateinit var response: Response
@@ -21,9 +26,6 @@ class LoginTests: Setup() {
     @Test
     @Order(1)
     @DisplayName("Login bem sucedido")
-    fun `login succeeded` () {
-        usersRequests.createUser(user)
-        response = login.loginRequest(user.email, user.password )
         assertEquals(HttpStatus.SC_OK, response.statusCode)
         assertEquals("Login realizado com sucesso", response.jsonPath().get("message"))
     }
@@ -54,5 +56,4 @@ class LoginTests: Setup() {
         assertEquals(HttpStatus.SC_BAD_REQUEST, response.statusCode)
         assertEquals("password não pode ficar em branco", response.jsonPath().get("password"))
     }
-
 }

@@ -13,8 +13,7 @@ import io.restassured.response.Response
 
 open class ProductRequests : Setup() {
 
-    open fun getAllProducts () : Response {
-
+    open fun getAllProducts(): Response {
         val response =
             Given {
                 spec(requestSpecification)
@@ -23,15 +22,13 @@ open class ProductRequests : Setup() {
             } When {
                 get("/produtos")
             } Then {
-
             } Extract {
                 response()
             }
         return response
     }
 
-    open fun getProductById (_id: String) : Response {
-
+    open fun getProductById(_id: String): Response {
         val response =
             Given {
                 spec(requestSpecification)
@@ -40,14 +37,13 @@ open class ProductRequests : Setup() {
             } When {
                 get("/produtos/$_id")
             } Then {
-
             } Extract {
                 response()
             }
         return response
     }
 
-    open fun createNewProduct(product : Product, token: String) : Response {
+    open fun createNewProduct(product: Product, token: String): Response {
         val response =
             Given {
                 spec(requestSpecification)
@@ -58,14 +54,13 @@ open class ProductRequests : Setup() {
             } When {
                 post("/produtos")
             } Then {
-
             } Extract {
                 response()
             }
         return response
     }
 
-    open fun updateProduct(product : Product, _id: String, token: String) : Response {
+    open fun updateProduct(product: Product, _id: String, token: String): Response {
         val response =
             Given {
                 spec(requestSpecification)
@@ -74,18 +69,15 @@ open class ProductRequests : Setup() {
                     .header("Authorization", token)
                     .body(gson.toJson(product))
             } When {
-                put("/produtos/$_id" +
-                        "")
+                put("/produtos/$_id")
             } Then {
-
             } Extract {
                 response()
             }
         return response
     }
 
-    open fun deleteProduct (_id: String, token: String) : Response {
-
+    open fun deleteProduct(_id: String, token: String): Response {
         val response =
             Given {
                 spec(requestSpecification)
@@ -95,7 +87,6 @@ open class ProductRequests : Setup() {
             } When {
                 delete("/produtos/$_id")
             } Then {
-
             } Extract {
                 response()
             }

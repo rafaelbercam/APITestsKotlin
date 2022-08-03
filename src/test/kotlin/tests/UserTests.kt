@@ -1,4 +1,5 @@
 @file:Suppress("ClassName")
+
 package tests
 
 import core.Setup
@@ -6,14 +7,16 @@ import factory.User
 import io.github.serpro69.kfaker.Faker
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
-import org.junit.jupiter.api.*
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
+import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import requests.UsersRequests
 import org.junit.jupiter.api.Assertions.assertEquals
 
 @TestMethodOrder(OrderAnnotation::class)
-class UserTests: Setup() {
-
+class UserTests : Setup() {
     private lateinit var _id: String
     private var usersRequests  = UsersRequests()
     private lateinit var response: Response

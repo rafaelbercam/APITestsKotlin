@@ -1,4 +1,5 @@
 @file:Suppress("ClassName")
+
 package tests
 
 import core.Setup
@@ -6,7 +7,12 @@ import factory.Product
 import factory.User
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.MethodOrderer
+import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import requests.LoginRequests
 import requests.ProductRequests
 import requests.UsersRequests
@@ -14,6 +20,7 @@ import kotlin.test.assertEquals
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class ProductTests : Setup() {
+
 
     private var login = LoginRequests()
     private var productRequest = ProductRequests()

@@ -7,4 +7,3 @@ data class LoginData(
     var email_empty: String,
     val password_empty: String
 )
-

@@ -14,7 +14,6 @@ import io.restassured.response.Response
 open class LoginRequests : Setup() {
 
     open fun loginRequest (email: String, password: String) : Response {
-
         val response =
             Given {
                 spec(requestSpecification)
@@ -24,7 +23,6 @@ open class LoginRequests : Setup() {
             } When {
                 post("/login")
             } Then {
-
             } Extract {
                 response()
             }

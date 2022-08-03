@@ -1,4 +1,5 @@
 [![Badge ServeRest](https://img.shields.io/badge/API-ServeRest-green)](https://github.com/ServeRest/ServeRest/)
+<a href="https://pinterest.github.io/ktlint/"><img src="https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg" alt="ktlint"></a>
 # __Testes de API em Kotlin__
 
 
@@ -47,7 +48,7 @@ O projeto esta dividido da seguinte maneira:
             [runner] -> Runner do JUnit
             [tests] -> Arquivos de teste do JUnit
 
-
+## Detalhamento
 ### core
 
 A classe `Setup` é responsável por configurar o `RequestSpecification` do REST-assured antes de realizar as requisições,
