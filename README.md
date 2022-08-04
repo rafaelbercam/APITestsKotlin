@@ -219,3 +219,16 @@ OBS: Não utilize para criar uma dependência de um cenário para outro, mas sim
 Para gerar os reports basta rodar os commandos
 
 `./gradlew allureReport` e `./gradlew allureServe`
+
+### ktlint
+
+Foi utilizado o processador de estilização de código ktlint, ele analisa se o código foi desenvolvido
+seguindo as boas práticas da linguagem Kotlin.
+
+Para verificar se o código esta com algum code smell basta rodar o comando
+
+`gradle ktlint`
+
+Assim que encontrar os erros, basta rodar o comando abaixo para corrigir pos problemas
+
+`gradle ktlintFormat`
