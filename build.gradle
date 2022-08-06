@@ -61,7 +61,6 @@ task ktlint(type: JavaExec, group: "verification") {
     classpath = configurations.ktlint
     mainClass.set("com.pinterest.ktlint.Main")
     args "src/**/*.kt"
-    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
 }
 check.dependsOn ktlint
 
@@ -70,5 +69,4 @@ task ktlintFormat(type: JavaExec, group: "formatting") {
     classpath = configurations.ktlint
     mainClass.set("com.pinterest.ktlint.Main")
     args "-F", "src/**/*.kt"
-    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
 }
