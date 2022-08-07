@@ -1,5 +1,6 @@
 package core
 
+import io.github.cdimascio.dotenv.dotenv
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
 import io.restassured.config.LogConfig
@@ -11,8 +12,11 @@ import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
 
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 open class Setup {
+
+    val dotenv = dotenv()
 
     companion object {
         lateinit var requestSpecification: RequestSpecification
@@ -25,7 +29,7 @@ open class Setup {
         val config = RestAssuredConfig.config().logConfig(logConfig)
 
         requestSpecification = RequestSpecBuilder()
-            .setBaseUri("http://localhost:3000")
+            .setBaseUri(dotenv["DEV"])
             .setContentType(ContentType.JSON)
             .setRelaxedHTTPSValidation()
             .setConfig(config)
