@@ -31,7 +31,7 @@ jobs:
         run: ./gradlew clean test
 
       - name: Collect Allure files and generate allure-report folder
-        run:  allure generate ./build/allure-results -o allure-report
+        run:  allure generate ./build/allure-results -o allure-report --clean
       - name: 🎁 Step 6 - Publishing Allure artifact to GitHub Actions
         uses: simple-elf/allure-report-action@master
         with:
