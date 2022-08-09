@@ -35,7 +35,7 @@ open class Setup {
         val config = RestAssuredConfig.config().logConfig(logConfig)
 
         requestSpecification = RequestSpecBuilder()
-            .setBaseUri(dotenv["DEV"])
+            .setBaseUri(dotenv["PROD"])
             .setContentType(ContentType.JSON)
             .setRelaxedHTTPSValidation()
             .setConfig(config)
