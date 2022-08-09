@@ -20,9 +20,6 @@ open class LoginRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(AllureRestAssured())
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .body(Json.encodeToString(login))
             } When {
                 post("/login")

@@ -22,12 +22,13 @@ dependencies {
             attribute(Bundling.BUNDLING_ATTRIBUTE, getObjects().named(Bundling, Bundling.EXTERNAL))
         }
     }
+    implementation("io.qameta.allure:allure-plugin-api:2.18.1")
     implementation("io.qameta.allure:allure-rest-assured:2.18.1")
     implementation "org.hamcrest:hamcrest:2.2"
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'io.github.serpro69:kotlin-faker:1.11.0'
-    testImplementation("io.qameta.allure:allure-junit5:2.14.0")
+    testImplementation("io.qameta.allure:allure-junit5:2.18.1")
     implementation("io.qameta.allure:allure-okhttp3:2.10.0")
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation("io.github.cdimascio:dotenv-kotlin:6.3.1")

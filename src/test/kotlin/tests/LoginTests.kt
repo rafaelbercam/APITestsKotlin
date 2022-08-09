@@ -4,6 +4,7 @@ package tests
 
 import core.Setup
 import factory.LoginFactory
+import io.qameta.allure.Attachment
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.DisplayName

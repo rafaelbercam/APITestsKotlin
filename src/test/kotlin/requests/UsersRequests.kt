@@ -19,8 +19,6 @@ open class UsersRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
             } When {
                 get("/usuarios")
             } Then {
@@ -34,8 +32,6 @@ open class UsersRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
             } When {
                 get("/usuarios/$_id")
             } Then {
@@ -49,8 +45,6 @@ open class UsersRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .body(Json.encodeToString(user))
             } When {
                 post("/usuarios")
@@ -65,8 +59,6 @@ open class UsersRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .body(Json.encodeToString(user))
             } When {
                 put("/usuarios/$_id")
@@ -81,8 +73,6 @@ open class UsersRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
             } When {
                 delete("/usuarios/$_id")
             } Then {

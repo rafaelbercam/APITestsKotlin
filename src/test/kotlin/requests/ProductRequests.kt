@@ -19,8 +19,6 @@ open class ProductRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
             } When {
                 get("/produtos")
             } Then {
@@ -34,8 +32,6 @@ open class ProductRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
             } When {
                 get("/produtos/$_id")
             } Then {
@@ -49,8 +45,6 @@ open class ProductRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
                     .body(Json.encodeToString(product))
             } When {
@@ -66,8 +60,6 @@ open class ProductRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
                     .body(Json.encodeToString(product))
             } When {
@@ -83,8 +75,6 @@ open class ProductRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
             } When {
                 delete("/produtos/$_id")

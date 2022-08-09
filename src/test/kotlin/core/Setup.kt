@@ -8,6 +8,8 @@ import io.restassured.builder.RequestSpecBuilder
 import io.restassured.config.LogConfig
 import io.restassured.config.RestAssuredConfig
 import io.restassured.filter.log.LogDetail
+import io.restassured.filter.log.RequestLoggingFilter
+import io.restassured.filter.log.ResponseLoggingFilter
 import io.restassured.http.ContentType
 import io.restassured.response.Response
 import io.restassured.specification.RequestSpecification
@@ -33,11 +35,12 @@ open class Setup {
         val config = RestAssuredConfig.config().logConfig(logConfig)
 
         requestSpecification = RequestSpecBuilder()
-            .setBaseUri(dotenv["PROD"])
+            .setBaseUri(dotenv["DEV"])
             .setContentType(ContentType.JSON)
             .setRelaxedHTTPSValidation()
             .setConfig(config)
-            .addFilter(AllureRestAssured())
+            .addFilter(RequestLoggingFilter(LogDetail.ALL))
+            .addFilter(ResponseLoggingFilter(LogDetail.ALL))
             .build()
     }
 

@@ -16,8 +16,6 @@ open class CartRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
             } When {
                 get("/carrinhos")
             } Then {
@@ -31,8 +29,6 @@ open class CartRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
                     .body("{ \"produtos\": [ {\n\"idProduto\": \"$_id\",\n\"quantidade\": $qtd\n}]}")
             } When {
@@ -48,8 +44,6 @@ open class CartRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
             } When {
                 delete("/carrinhos/cancelar-compra")
@@ -64,8 +58,6 @@ open class CartRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .header("Authorization", token)
             } When {
                 delete("/carrinhos/concluir-compra")
