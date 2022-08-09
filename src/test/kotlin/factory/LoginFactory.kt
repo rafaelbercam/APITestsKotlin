@@ -1,22 +1,25 @@
 package factory
 
+import io.github.cdimascio.dotenv.dotenv
 import kotlinx.serialization.Required
 import kotlinx.serialization.Serializable
 
 open class LoginFactory {
 
+    val dotenv = dotenv()
+
     val loginSucceeded: Login
         get() {
             return Login(
-                email = "fulano@qa.com",
-                password = "teste"
+                email = dotenv["EMAIL"],
+                password = dotenv["PASSWORD"]
             )
         }
 
     val loginFail: Login
         get() {
             return Login(
-                email = "fulano@qa.com",
+                email = dotenv["EMAIL"],
                 password = "any"
             )
         }
@@ -25,14 +28,14 @@ open class LoginFactory {
         get() {
             return Login(
                 email = "",
-                password = "teste"
+                password = dotenv["PASSWORD"]
             )
         }
 
     val loginPasswordRequired: Login
         get() {
             return Login(
-                email = "fulano@qa.com",
+                email = dotenv["EMAIL"],
                 password = ""
             )
         }
