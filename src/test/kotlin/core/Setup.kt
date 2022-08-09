@@ -2,6 +2,7 @@ package core
 
 import factory.UserFactory
 import io.github.cdimascio.dotenv.dotenv
+import io.qameta.allure.restassured.AllureRestAssured
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
 import io.restassured.config.LogConfig
@@ -36,6 +37,7 @@ open class Setup {
             .setContentType(ContentType.JSON)
             .setRelaxedHTTPSValidation()
             .setConfig(config)
+            .addFilter(AllureRestAssured())
             .build()
     }
 

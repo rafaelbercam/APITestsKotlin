@@ -2,6 +2,7 @@ package requests
 
 import core.Setup
 import factory.Login
+import io.qameta.allure.restassured.AllureRestAssured
 import io.restassured.filter.log.LogDetail
 import io.restassured.filter.log.RequestLoggingFilter
 import io.restassured.filter.log.ResponseLoggingFilter
@@ -19,6 +20,7 @@ open class LoginRequests : Setup() {
         val response =
             Given {
                 spec(requestSpecification)
+                    .filter(AllureRestAssured())
                     .filter(RequestLoggingFilter(LogDetail.ALL))
                     .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .body(Json.encodeToString(login))

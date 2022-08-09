@@ -22,6 +22,7 @@ dependencies {
             attribute(Bundling.BUNDLING_ATTRIBUTE, getObjects().named(Bundling, Bundling.EXTERNAL))
         }
     }
+    implementation("io.qameta.allure:allure-rest-assured:2.18.1")
     implementation "org.hamcrest:hamcrest:2.2"
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
