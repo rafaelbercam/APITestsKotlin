@@ -17,7 +17,7 @@ import kotlin.test.assertEquals
 @TestMethodOrder(OrderAnnotation::class)
 class UserTests : Setup() {
 
-    var _id: String = ""
+    private lateinit var _id: String
     var request = UsersRequests()
     lateinit var response: Response
 

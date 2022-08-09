@@ -24,7 +24,7 @@ class ProductTests : Setup() {
     var request = ProductRequests()
     lateinit var response: Response
     lateinit var token: String
-    lateinit var _id: String
+    private lateinit var _id: String
 
     @BeforeAll
     fun `get token`() {
