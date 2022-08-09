@@ -34,8 +34,6 @@ jobs:
         run:  allure generate ./build/allure-results -o allure-report
       - name: 🎁 Step 6 - Publishing Allure artifact to GitHub Actions
         uses: simple-elf/allure-report-action@master
-          if: always()
-          id: allure-report
           with:
             allure_results: build/allure-results
             gh_pages: gh-pages
