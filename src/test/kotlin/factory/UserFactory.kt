@@ -15,7 +15,7 @@ class UserFactory {
             val lastName = faker.name.lastName()
             return User(
                 nome = "$firstName $lastName",
-                email = "${firstName.lowercase()}${lastName.lowercase()}@email.com",
+                email = "${firstName.lowercase()}${lastName.lowercase()}@qa.com",
                 password = faker.random.nextLong(bound = 9999999L).toString(),
                 administrador = "true"
             )

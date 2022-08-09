@@ -4,17 +4,14 @@ package tests
 
 import core.Setup
 import factory.LoginFactory
-import factory.UserFactory
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 import requests.LoginRequests
-import requests.UsersRequests
 import kotlin.test.assertEquals
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
@@ -23,13 +20,6 @@ class LoginTests : Setup() {
     var request = LoginRequests()
     lateinit var response: Response
     var login = LoginFactory()
-    var newUser = UserFactory()
-
-    @BeforeAll
-    fun `create user adm`() {
-        var user = UsersRequests()
-        response = user.createUser(newUser.createPreUser)
-    }
 
     @Test
     @Order(1)
