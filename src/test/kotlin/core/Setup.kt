@@ -41,6 +41,7 @@ open class Setup {
             .setConfig(config)
             .addFilter(RequestLoggingFilter(LogDetail.ALL))
             .addFilter(ResponseLoggingFilter(LogDetail.ALL))
+            .addFilter(/* filter = */ AllureRestAssured())
             .build()
     }
 
