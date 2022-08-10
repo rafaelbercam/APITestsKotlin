@@ -32,6 +32,10 @@ replay_pid*
 **/build/
 !src/**/build/
 
+### IDEA ###
+.idea
+.DS_Store
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
