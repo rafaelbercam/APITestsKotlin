@@ -5,10 +5,10 @@ package tests
 import core.Setup
 import factory.LoginFactory
 import factory.ProductFactory
+import io.qameta.allure.Description
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
@@ -35,7 +35,7 @@ class ProductTests : Setup() {
 
     @Test
     @Order(1)
-    @DisplayName("Listando todos Produtos")
+    @Description("Listando todos Produtos")
     fun `list all products`() {
         response = request.getAllProducts()
         assertEquals(HttpStatus.SC_OK, response.statusCode())
@@ -43,7 +43,7 @@ class ProductTests : Setup() {
 
     @Test
     @Order(2)
-    @DisplayName("Criando novo produto")
+    @Description("Criando novo produto")
     fun `create a new product`() {
         val product = ProductFactory()
         response = request.createNewProduct(product.createProduct, token)
@@ -53,7 +53,7 @@ class ProductTests : Setup() {
 
     @Test
     @Order(3)
-    @DisplayName("consultando produto pelo _id")
+    @Description("consultando produto pelo _id")
     fun `get product by id`() {
         val allProducts: Response = request.getAllProducts()
         _id = allProducts.jsonPath().get("produtos[0]._id")
@@ -64,7 +64,7 @@ class ProductTests : Setup() {
 
     @Test
     @Order(4)
-    @DisplayName("alterando um produto")
+    @Description("alterando um produto")
     fun `update a product`() {
         val product = ProductFactory()
         val allProducts: Response = request.getAllProducts()
@@ -76,7 +76,7 @@ class ProductTests : Setup() {
 
     @Test
     @Order(5)
-    @DisplayName("deletando um produto")
+    @Description("deletando um produto")
     fun `delete a product`() {
         var newProductFac = ProductFactory()
         var newProduct: Response = request.createNewProduct(newProductFac.createProduct, token)

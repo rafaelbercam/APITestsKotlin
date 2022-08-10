@@ -4,9 +4,9 @@ package tests
 
 import core.Setup
 import factory.UserFactory
+import io.qameta.allure.Description
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
@@ -23,7 +23,7 @@ class UserTests : Setup() {
 
     @Test
     @Order(1)
-    @DisplayName("Listando todos Usuários")
+    @Description("Listando todos Usuários")
     fun `list all users`() {
         response = request.getAllUsers()
         assertEquals(HttpStatus.SC_OK, response.statusCode())
@@ -31,7 +31,7 @@ class UserTests : Setup() {
 
     @Test
     @Order(2)
-    @DisplayName("Criando novo usuário")
+    @Description("Criando novo usuário")
     fun `create a new user`() {
         val user = UserFactory()
         response = request.createUser(user.createUser)
@@ -42,7 +42,7 @@ class UserTests : Setup() {
 
     @Test
     @Order(3)
-    @DisplayName("Listando usuário por _id")
+    @Description("Listando usuário por _id")
     fun `get user by _id`() {
         response = request.getUSerById(_id)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
@@ -51,7 +51,7 @@ class UserTests : Setup() {
 
     @Test
     @Order(4)
-    @DisplayName("Alterando um usuário")
+    @Description("Alterando um usuário")
     fun `update an user`() {
         val user = UserFactory()
         response = request.updateUser(_id, user.createUser)

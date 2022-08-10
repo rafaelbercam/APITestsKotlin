@@ -4,10 +4,9 @@ package tests
 
 import core.Setup
 import factory.LoginFactory
-import io.qameta.allure.Attachment
+import io.qameta.allure.Description
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
@@ -24,7 +23,7 @@ class LoginTests : Setup() {
 
     @Test
     @Order(1)
-    @DisplayName("Login bem sucedido")
+    @Description("Login bem sucedido")
     fun `login succeeded`() {
         response = request.login(login.loginSucceeded)
         assertEquals(HttpStatus.SC_OK, response.statusCode)
@@ -33,7 +32,7 @@ class LoginTests : Setup() {
 
     @Test
     @Order(2)
-    @DisplayName("Login com falha")
+    @Description("Login com falha")
     fun `login failed`() {
         response = request.login(login.loginFail)
         assertEquals(HttpStatus.SC_UNAUTHORIZED, response.statusCode)
@@ -42,7 +41,7 @@ class LoginTests : Setup() {
 
     @Test
     @Order(3)
-    @DisplayName("Email obrigatório")
+    @Description("Email obrigatório")
     fun `login failed - email required`() {
         response = request.login(login.loginEmailRequired)
         assertEquals(HttpStatus.SC_BAD_REQUEST, response.statusCode)
@@ -51,7 +50,7 @@ class LoginTests : Setup() {
 
     @Test
     @Order(4)
-    @DisplayName("Password obrigatório")
+    @Description("Password obrigatório")
     fun `login failed - password required`() {
         response = request.login(login.loginPasswordRequired)
         assertEquals(HttpStatus.SC_BAD_REQUEST, response.statusCode)

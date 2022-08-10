@@ -2,6 +2,7 @@ package requests
 
 import core.Setup
 import factory.Login
+import io.qameta.allure.Step
 import io.qameta.allure.restassured.AllureRestAssured
 import io.restassured.filter.log.LogDetail
 import io.restassured.filter.log.RequestLoggingFilter
@@ -16,6 +17,7 @@ import kotlinx.serialization.json.Json
 
 open class LoginRequests : Setup() {
 
+    @Step("login request /login")
     open fun login(login: Login): Response {
         val response =
             Given {

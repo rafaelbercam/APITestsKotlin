@@ -4,10 +4,10 @@ package tests
 
 import core.Setup
 import factory.LoginFactory
+import io.qameta.allure.Description
 import io.restassured.response.Response
 import org.apache.http.HttpStatus
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
@@ -38,7 +38,7 @@ class CartTests : Setup() {
 
     @Test
     @Order(1)
-    @DisplayName("cancelando carrinhos existentes")
+    @Description("cancelando carrinhos existentes")
     fun `cancel cart`() {
         response = request.cancelCart(token)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
@@ -47,7 +47,7 @@ class CartTests : Setup() {
 
     @Test
     @Order(2)
-    @DisplayName("Criando um carrinho")
+    @Description("Criando um carrinho")
     fun `create new cart`() {
         val prod = ProductRequests()
         val resp: Response = prod.getAllProducts()
@@ -59,7 +59,7 @@ class CartTests : Setup() {
 
     @Test
     @Order(3)
-    @DisplayName("Listando todos carrinhos")
+    @Description("Listando todos carrinhos")
     fun `list all products`() {
         response = request.getCarts()
         assertEquals(HttpStatus.SC_OK, response.statusCode())
@@ -67,7 +67,7 @@ class CartTests : Setup() {
 
     @Test
     @Order(4)
-    @DisplayName("Concluindo compra carrinho")
+    @Description("Concluindo compra carrinho")
     fun `submit cart`() {
         response = request.submitCart(token)
         assertEquals(HttpStatus.SC_OK, response.statusCode())
