@@ -28,7 +28,7 @@ jobs:
           java-version: 11
 
       - name: Run tests
-        run: ./gradlew clean test
+        run: ./gradlew clean test --tests "runner.AllIntegratedTests"
 
       - name: Collect Allure files and generate allure-report folder
         run:  allure generate ./build/allure-results -o allure-report/ --clean
