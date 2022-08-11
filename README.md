@@ -19,7 +19,7 @@ ServeRest está disponível de forma [online](https://serverest.dev), no [npm](h
 
 ## __Instalando Dependências__
 
-###Instalar via [Gradle](https://gradle.org/)
+### Instalar via [Gradle](https://gradle.org/)
 
 
 
@@ -34,6 +34,7 @@ O projeto esta dividido da seguinte maneira:
             [requests] -> Métodos que retornam o objeto Response do REST-assured
             [runner] -> Runner do JUnit
             [tests] -> Arquivos de teste do JUnit
+            .env -> Arquivo com variáveis de ambiente abstraídas pelo dotenv
 
 ## Detalhamento
 ### core
@@ -49,30 +50,39 @@ E temos também um `tearDown` que aciona o reset do REST-assured.
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 open class Setup {
 
+    val dotenv = dotenv()
+
     companion object {
         lateinit var requestSpecification: RequestSpecification
     }
 
     @BeforeAll
-    fun setup(){
+    fun setup() {
         val logConfig = LogConfig.logConfig()
             .enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL)
         val config = RestAssuredConfig.config().logConfig(logConfig)
 
         requestSpecification = RequestSpecBuilder()
-            .setBaseUri("http://localhost:3000")
+            .setBaseUri(dotenv["PROD"])
             .setContentType(ContentType.JSON)
             .setRelaxedHTTPSValidation()
             .setConfig(config)
+            .addFilter(RequestLoggingFilter(LogDetail.ALL))
+            .addFilter(ResponseLoggingFilter(LogDetail.ALL))
+            .addFilter(/* filter = */ AllureRestAssured())
             .build()
     }
 
     @AfterAll
-    fun tearDown(){
+    fun tearDown() {
         RestAssured.reset()
     }
 }
 ```
+
+Veja que foi utilizado o dotenv Kotlin para abstrair a `urlBase` do Serverest que esta no arquivo `.env` 
+na raiz do projeto
+
 
 ### factory
 
@@ -86,31 +96,37 @@ Então nessas classes foi utilizado Properties que retornam objetos definidos po
 definido pela anotação `@Serializable`
 
 ```kotlin
-open class LoginFactory {
-
-    val loginSucceeded: Login
+class ProductFactory {
+    var faker = Faker()
+    val createProduct: Product
         get() {
-            return Login(
-                email = "fulano@qa.com",
-                password = "teste"
+            val productName = faker.commerce.productName()
+            return Product(
+                nome = productName,
+                preco = faker.random.nextInt(10, 999),
+                descricao = "Awesome $productName",
+                quantidade = faker.random.nextInt(bound = 9999)
             )
         }
-
-    val loginFail: Login
-        get() {
-            return Login(
-                email = "fulano@qa.com",
-                password = "any"
-            )
-        }
-    
-    //other methods
 }
+
 @Serializable
-data class Login (
-    @Required var email: String,
-    @Required var password: String  )
+data class Product(
+    @Required var nome: String,
+    @Required var preco: Int,
+    @Required var descricao: String,
+    @Required var quantidade: Int
+)
+
 ```
+
+A ideia de usar essa estratégia é justamente delegar para a própria classe Factory
+construir os objetos a serem usados nas requisições.
+
+A partir do momento em que você replica parte do código no seu teste, repetindo em outras partes do seu código,
+a manutenção do seu código irá sofrer muitos pontos de alteração, então use desse formato para trazer uma maior
+robustez para seus testes.
+
 
 ### requests
 
@@ -124,18 +140,15 @@ os verbos `Given, When, Then, Extract` do REST-assured.
 ```kotlin
 open class LoginRequests : Setup() {
 
-    open fun login (login: Login) : Response {
-
+    @Step("login request /login")
+    open fun login(login: Login): Response {
         val response =
             Given {
                 spec(requestSpecification)
-                    .filter(RequestLoggingFilter(LogDetail.ALL))
-                    .filter(ResponseLoggingFilter(LogDetail.ALL))
                     .body(Json.encodeToString(login))
             } When {
                 post("/login")
             } Then {
-
             } Extract {
                 response()
             }
@@ -174,6 +187,10 @@ O exemplo esta redundante, mas foi para exemplificar que podemos fazer da seguin
 
 Podem ser criados outros runners dependendo do tipo de teste, como por exemplo
 testes de regressão e testes de uma feature específica.
+
+Exemplo de execução com linha de comando do gradle
+
+`./gradlew clean test --tests "runner.AllIntegratedTests"`
 
 ### tests
 
@@ -232,3 +249,9 @@ Para verificar se o código esta com algum code smell basta rodar o comando
 Assim que encontrar os erros, basta rodar o comando abaixo para corrigir pos problemas
 
 `gradle ktlintFormat`
+
+### GitHub Actions
+
+Este projeto conta com a configuração do `GitHub Actions` e Configuração do `GitHub Pages` 
+para saber mais pesquise e veja o arquivo de configuração no diretório ``/.github``
+

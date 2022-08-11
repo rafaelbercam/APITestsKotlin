@@ -1,4 +1,4 @@
-name: "testes serverest"
+name: "automated tests serverest"
 on:
   push:
     branches:
@@ -19,26 +19,26 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - name: Install operating system dependencies
+      - name: Step 1 - Install operating system dependencies
         run:  |
           npm install -g allure-commandline --save-dev
-      - name: Set up JDK 11
+      - name: Step 2 - Set up JDK 11
         uses: actions/setup-java@v1
         with:
           java-version: 11
 
-      - name: Run tests
+      - name: Step 3 - Run tests
         run: ./gradlew clean test --tests "runner.AllIntegratedTests"
 
-      - name: Collect Allure files and generate allure-report folder
+      - name: Step 4 - Collect Allure files and generate allure-report folder
         run:  allure generate ./build/allure-results -o allure-report/ --clean
-      - name: 🎁 Step 6 - Publishing Allure artifact to GitHub Actions
+      - name: Step 5 - Publishing Allure artifact to GitHub Actions
         uses: actions/upload-artifact@v2
         with:
           name: allure-report
           path: allure-report
 
-      - name: Deploy
+      - name: Step 6 - Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
