@@ -1,0 +1,32 @@
+<div>POST to https://serverest.dev/produtos</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+    {
+    &quot;nome&quot;: &quot;Rustic Granite Bag&quot;,
+    &quot;preco&quot;: 320,
+    &quot;descricao&quot;: &quot;Awesome Rustic Granite Bag&quot;,
+    &quot;quantidade&quot;: 2238
+}
+    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbGJlcmNhbUBxYS5jb20iLCJwYXNzd29yZCI6IjE0OTdmODdhZGY1YjM1MmFiZDAzNjBkZTk2YzA0MTQwOWE0Y2U1MjEiLCJpYXQiOjE2NjAyMjk2MjYsImV4cCI6MTY2MDIzMDIyNn0.XaVDoUyAuPNo2TV2dBKluv07PFvBBmBHdCdW-gBIZF8</div>
+        <div>Accept: */*</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://serverest.dev/produtos&#39; -H &#39;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbGJlcmNhbUBxYS5jb20iLCJwYXNzd29yZCI6IjE0OTdmODdhZGY1YjM1MmFiZDAzNjBkZTk2YzA0MTQwOWE0Y2U1MjEiLCJpYXQiOjE2NjAyMjk2MjYsImV4cCI6MTY2MDIzMDIyNn0.XaVDoUyAuPNo2TV2dBKluv07PFvBBmBHdCdW-gBIZF8&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;nome&quot;: &quot;Rustic Granite Bag&quot;,
+    &quot;preco&quot;: 320,
+    &quot;descricao&quot;: &quot;Awesome Rustic Granite Bag&quot;,
+    &quot;quantidade&quot;: 2238
+}&#39;
+</div>
